@@ -1,3 +1,3 @@
-# 2021-WaterAndEnviormentalMonitoring
-2021-WaterAndEnviormentalMonitoring
+# 2021-WaterAndEnviromentalMonitoring
+2021-WaterAndEnviromentalMonitoring
 V1
