@@ -205,7 +205,9 @@ void getmylatlon()
       Serial.println(payload);             //Print the response payload
       //    {"status":"success","country":"Canada","countryCode":"CA","region":"ON","regionName":"Ontario","city":"Toronto","zip":"M4S","lat":43.7012,"lon":-79.3877,"timezone":"America/Toronto","isp":"Rogers Communications Canada Inc.","org":"Rogers Cable Inc. BAWK","as":"AS812 Rogers Communications Canada Inc.","query":"99.239.64.188"}
         deserializeJson(doc, payload);
-        if (doc["lon"] <> NULL)
+        double lon   = doc["lon"];
+        Serial.println(lon);     
+        if (lon != NULL)
         {
          longitude   = doc["lon"];
           latitude   = doc["lat"];
