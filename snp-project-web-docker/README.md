@@ -8,10 +8,10 @@ You will need Docker on your machine.
 
 ```bash
 # Build Image
-docker build -t bootstrap-nginx
+docker build -t bootstrap-nginx .
 
 # Run container
-docker run -d -p 80:80 bootstrap-nginx
+docker run -d -p 80:80 bootstrap-nginx 
 
 # Confirm container is running
 docker container ls
