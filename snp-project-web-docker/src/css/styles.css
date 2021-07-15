@@ -482,25 +482,31 @@ mark,
 .img-photos {
   display: flex;
   flex-grow: 0;
-  border: red solid 1px;
+  /* border: red solid 1px; */
+  justify-content: center;
 }
 
 .img-photo {
   flex-direction: row;
   object-fit: cover;
+  object-position: top;
+  margin: 30px;
+  /* border: solid 1px red; */
   height: 250px;
   width: 300px;
 }
 
 .img-quotes {
   flex-direction: column;
-  border: red solid 1px;
+  /* border: red solid 1px; */
   margin: 20px;
-  background-color: rgb(59, 59, 59);
+  background-color: rgba(54, 54, 54, 0.445);
+  margin: 20px;
 }
 
 .img-quote {
   object-fit: cover;
+  flex-shrink: 3;
 }
 
 .img-thumbnail {
@@ -602,6 +608,12 @@ pre code {
   flex-wrap: wrap;
   margin-right: -0.75rem;
   margin-left: -0.75rem;
+  justify-content: center;
+}
+
+.fuller {
+  padding: 50px;
+  /* border: red 1px solid; */
 }
 
 .no-gutters {
