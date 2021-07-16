@@ -16,7 +16,7 @@
 #include "CayenneLPP.h"
 #include "cert.h"
 
-String ver = {"0.0.2"}; // used for checking for updates -- only changes when updated
+String ver = {"0.0.3"}; // used for checking for updates -- only changes when updated
 #define URL_version "https://raw.githubusercontent.com/SixNationsPolytechnic/2021-WaterAndEnviromentalMonitoring/Jarrod/codes/otaplayground/esp32/version.txt"
 #define URL_bin "https://raw.githubusercontent.com/SixNationsPolytechnic/2021-WaterAndEnviromentalMonitoring/Jarrod/codes/otaplayground/esp32/firmware.bin"
 
@@ -41,6 +41,10 @@ const int checksPerDay = 2880; // 2880 is every minute; this is for testing. In 
 
 //WiFiUDP ntpUDP;
 //NTPClient timeClient(ntpUDP, "us.pool.ntp.org", -18000, 6000);
+
+WiFiClient wificlient;
+CayenneLPP lpp(51);
+PubSubClient mqttclient(wificlient);
 String formattedDate;
 String dayStamp;
 String timeStamp;
@@ -104,29 +108,15 @@ bool wifiConnect (char* ssid, char* pass) { // attempt to connect to a wifi netw
   return true;
 }
 
-String macToStr() {
-  String result;
-  uint8_t mac = WiFi.macAddress();
-  for (int i = 0; i < 6; ++i) {
-    result += String(mac[i], 16);
-    if (i < 5)
-      result += ':';
-  }
-  return result;
-}
-
 /*-------------------------------------------------------------------*\
  * 
  *  MQTT Jazz
  * 
 \*-------------------------------------------------------------------*/
 
-CayenneLPP lpp(51);
-PubSubClient mqttclient(espClient);
-
 void mqttSetup() {
   mqttclient.setServer(deviceInfo.mqtt, 1883);
-  mqttclient.setCallback(callback);
+  mqttclient.setCallback(mqttCallback);
   mqttclient.subscribe("sensor/jw01/command");
 }
 
@@ -144,11 +134,11 @@ void mqttReconnect() {
   while (!mqttclient.connected()) {
     String clientName;
     clientName += "esp8266-";
-    clientName += macToStr();
+    clientName += WiFi.macAddress();
     clientName += "-";
     clientName += String(micros() & 0xff, 16);
     Serial.print("Connecting to ");
-    Serial.print(mqtt_server);
+    Serial.print(deviceInfo.mqtt);
     Serial.print(" as ");
     Serial.println(clientName);
 
@@ -156,8 +146,8 @@ void mqttReconnect() {
       //if (client.connect((char*) clientName.c_str()), mqtt_user, mqtt_password)) {
       Serial.println("connected");
       Serial.println("Sending hello message");
-      mqttmsg = "{\"hello\":\"" + String(DEVICEID) + "\"}";
-      String mytopic =  "sensor/" + String(DEVICEID) + "/hello";
+      mqttmsg = "{\"hello\":\"" + String(deviceInfo.devId) + "\"}";
+      String mytopic =  "sensor/" + String(deviceInfo.devId) + "/hello";
       mqttclient.publish(mytopic.c_str (), mqttmsg.c_str(), true);
 
     } else {
