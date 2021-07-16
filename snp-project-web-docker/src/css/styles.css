@@ -499,9 +499,9 @@ mark,
 .img-quotes {
   flex-direction: column;
   /* border: red solid 1px; */
-  margin: 20px;
   background-color: rgba(54, 54, 54, 0.445);
-  margin: 20px;
+  margin: 40px;
+  margin-bottom: 100px;
 }
 
 .img-quote {
