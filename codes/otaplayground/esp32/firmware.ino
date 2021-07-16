@@ -1,3 +1,4 @@
+#include <EEPROM.h>
 #include <WiFi.h>
 #include <WiFiClientSecure.h>
 //#include <WiFiUdp.h>
@@ -14,21 +15,20 @@ String ver = {"0.0.1"}; // used for checking for updates -- only changes when up
 #define URL_bin "https://raw.githubusercontent.com/SixNationsPolytechnic/2021-WaterAndEnviromentalMonitoring/Jarrod/codes/otaplayground/esp32/firmware.bin"
 
 // https://www.esp32.com/viewtopic.php?t=4931 -- implement later to make RTC survive update, if neccessary.
-// RTC_DATA_ATTR char* devId = "jw00T"; // use RTC to store data - 8kb available, survives deep sleep. No need to use the fake EEPROM.
+//RTC_DATA_ATTR char* devId = "jw00T"; // use RTC to store data - 8kb available, survives deep sleep.
 
-struct {
-  char devId[5];
-  char mqtt[12];
-  int msgCount = 0;
-  char ssidA[32];
-  char passA[32];
-  char ssidB[32];
-  char passB[32];
-  char ssidC[32];
-  char passC[32];
-  int temperature = 0;
-  int humidity = 0;
-} deviceInfo;
+struct deviceInfo {
+  char devId[6];
+  char mqtt[16];
+  char ssidA[33];
+  char passA[33];
+  char ssidB[33];
+  char passB[33];
+  char ssidC[33];
+  char passC[33];
+};
+
+
 
 //CayenneLPP lpp(51);
 //WiFiUDP ntpUDP;
@@ -38,13 +38,27 @@ String dayStamp;
 String timeStamp;
 
 void setup() {
+  deviceInfo d;
+  strcpy(d.devId, "jw00T");
+  strcpy(d.mqtt, "52.117.240.201");
+  strcpy(d.ssidA, "Aw geez Rick theres a password");
+  strcpy(d.passA, "SpaceRoses13");
+  strcpy(d.ssidB, "WSPDev");
+  strcpy(d.passB, "InTh3F1eld!");
+  strcpy(d.ssidC, "Network3");
+  strcpy(d.passC, "Example1793#.");
+  EEPROM.begin(224); // the deviceInfo struct should only be 224 bytes
+  EEPROM.put(0, d);
+  EEPROM.commit();
+
+  
 
   Serial.begin(115200);
   Serial.println("VERSION " + ver);
   boolean connected = false;
-  if (deviceInfo.ssidA && deviceInfo.passA) connected = wifiConnect(deviceInfo.ssidA, deviceInfo.passA);
-  if (!connected && deviceInfo.ssidB && deviceInfo.passB) connected = wifiConnect(deviceInfo.ssidB, deviceInfo.passB);
-  if (!connected && deviceInfo.ssidC && deviceInfo.passC) connected = wifiConnect(deviceInfo.ssidC, deviceInfo.passC);
+  //if (deviceInfo.ssidA && deviceInfo.passA) connected = wifiConnect(deviceInfo.ssidA, deviceInfo.passA);
+  //if (!connected && deviceInfo.ssidB && deviceInfo.passB) connected = wifiConnect(deviceInfo.ssidB, deviceInfo.passB);
+  //if (!connected && deviceInfo.ssidC && deviceInfo.passC) connected = wifiConnect(deviceInfo.ssidC, deviceInfo.passC);
   if (!connected) {
 
   } else {
