@@ -4019,11 +4019,18 @@ input[type=button].btn-block {
   border-color: transparent;
 }
 .nav-tabs .nav-link.active,
-.nav-tabs .nav-item.show .nav-link {
+.nav-tabs .nav-link {
   color: #495057;
   background-color: #fff;
   border-color: #dee2e6 #dee2e6 #fff;
 }
+
+.nav-item.show {
+  color: #495057;
+  background-color: #fff;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
 .nav-tabs .dropdown-menu {
   margin-top: -1px;
   border-top-left-radius: 0;
@@ -8068,6 +8075,7 @@ button.bg-black:focus {
   margin-left: auto !important;
 }
 
+
 @media (min-width: 576px) {
   .m-sm-0 {
     margin: 0 !important;
@@ -10190,15 +10198,15 @@ body {
   }
   #mainNav .navbar-brand {
     padding: 0.5rem 0;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 1);
   }
   #mainNav .nav-link {
     transition: none;
     padding: 2rem 1.5rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgb(255, 255, 255);
   }
   #mainNav .nav-link:hover {
-    color: rgba(255, 255, 255, 0.75);
+    color: rgb(255, 255, 255);
   }
   #mainNav .nav-link:active {
     color: #fff;
@@ -10220,7 +10228,7 @@ body {
   #mainNav.navbar-shrink .nav-link:active {
     color: #467370;
   }
-  #mainNav.navbar-shrink .nav-link.active {
+  #mainNav.navbar-shrink .active {
     color: #64a19d;
     outline: none;
     border-bottom: 0.25rem solid #64a19d;
@@ -10297,8 +10305,9 @@ body {
 }
 
 .projects-section {
-  padding: 10rem 0;
+  padding: 15rem 0;
 }
+
 .projects-section .featured-text {
   padding: 2rem;
 }
@@ -10329,7 +10338,7 @@ body {
 }
 
 .signup-section {
-  padding: 10rem 0;
+  padding: 15.5rem 0;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.5) 75%, #000000 100%), url("../assets/img/bg-signup.jpg");
   background-position: center;
   background-repeat: no-repeat;
