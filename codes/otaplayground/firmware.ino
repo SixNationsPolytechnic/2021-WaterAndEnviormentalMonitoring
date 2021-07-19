@@ -10,10 +10,10 @@
 #include <CertStoreBearSSL.h>
 BearSSL::CertStore certStore;
 #include <time.h>
- 
-const String FirmwareVer={"0.0.1"}; 
-#define URL_fw_Version "/SixNationsPolytechnic/2021-WaterAndEnviromentalMonitoring/master/codes/otaplayground/version.txt"
-#define URL_fw_Bin "https://raw.githubusercontent.com/SixNationsPolytechnic/2021-WaterAndEnviromentalMonitoring/master/codes/otaplayground/firmware.bin"
+
+const String FirmwareVer={"0.0.1"};
+#define URL_fw_Version "/SixNationsPolytechnic/2021-WaterAndEnviromentalMonitoring/jarrod/codes/otaplayground/version.txt"
+#define URL_fw_Bin "https://raw.githubusercontent.com/SixNationsPolytechnic/2021-WaterAndEnviromentalMonitoring/jarrod/codes/otaplayground/firmware.bin"
 const char* host = "raw.githubusercontent.com";
 const int httpsPort = 443;
 
@@ -72,11 +72,11 @@ void connect_wifi() {
   {
     delay(500);
     Serial.print("O");
-  }                                   
+  }
   Serial.println("Connected to WiFi");
 }
-  
-void FirmwareUpdate() {  
+
+void FirmwareUpdate() {
   WiFiClientSecure client;
   client.setTrustAnchors(&cert);
   if (!client.connect(host, httpsPort)) {
@@ -97,14 +97,14 @@ void FirmwareUpdate() {
   String payload = client.readStringUntil('\n');
 
   payload.trim();
-  if(payload.equals(FirmwareVer) ) {   
-     Serial.println("Device already on latest firmware version"); 
+  if(payload.equals(FirmwareVer) ) {
+     Serial.println("Device already on latest firmware version");
   }
   else {
     Serial.println("New firmware detected");
-    ESPhttpUpdate.setLedPin(LED_BUILTIN, LOW); 
+    ESPhttpUpdate.setLedPin(LED_BUILTIN, LOW);
     t_httpUpdate_return ret = ESPhttpUpdate.update(client, URL_fw_Bin);
-        
+
     switch (ret) {
       case HTTP_UPDATE_FAILED:
         Serial.printf("HTTP_UPDATE_FAILD Error (%d): %s\n", ESPhttpUpdate.getLastError(), ESPhttpUpdate.getLastErrorString().c_str());
@@ -117,7 +117,7 @@ void FirmwareUpdate() {
       case HTTP_UPDATE_OK:
         Serial.println("HTTP_UPDATE_OK");
         break;
-    } 
+    }
   }
 }
 
@@ -141,7 +141,7 @@ void repeatedCall(){
   }
 
   if ((currentMillis - previousMillis_2) >= mini_interval) { // this loop looks to be just so something shows in the serial
-    previousMillis_2 = currentMillis;    
+    previousMillis_2 = currentMillis;
     Serial.print(" Active fw version:");
     Serial.println(FirmwareVer);
     Serial.print("Idle Loop....");
@@ -150,17 +150,17 @@ void repeatedCall(){
   }
 }
 
-  
+
 void setup() {
   Serial.begin(115200);
   Serial.println("");
   Serial.println("Start");
   WiFi.mode(WIFI_STA);
-  connect_wifi();  
+  connect_wifi();
   setClock();
   pinMode(LED_BUILTIN, OUTPUT);
 }
 
 void loop() {
-  repeatedCall();    
+  repeatedCall();
 }
