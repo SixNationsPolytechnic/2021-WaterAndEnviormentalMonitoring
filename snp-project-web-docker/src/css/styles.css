@@ -479,6 +479,36 @@ mark,
   height: auto;
 }
 
+.img-photos {
+  display: flex;
+  flex-grow: 0;
+  /* border: red solid 1px; */
+  justify-content: center;
+}
+
+.img-photo {
+  flex-direction: row;
+  object-fit: cover;
+  object-position: top;
+  margin: 30px;
+  /* border: solid 1px red; */
+  height: 250px;
+  width: 300px;
+}
+
+.img-quotes {
+  flex-direction: column;
+  /* border: red solid 1px; */
+  background-color: rgba(54, 54, 54, 0.445);
+  margin: 40px;
+  margin-bottom: 100px;
+}
+
+.img-quote {
+  object-fit: cover;
+  flex-shrink: 3;
+}
+
 .img-thumbnail {
   padding: 0.25rem;
   background-color: #fff;
@@ -578,6 +608,12 @@ pre code {
   flex-wrap: wrap;
   margin-right: -0.75rem;
   margin-left: -0.75rem;
+  justify-content: center;
+}
+
+.fuller {
+  padding: 50px;
+  /* border: red 1px solid; */
 }
 
 .no-gutters {
@@ -3983,11 +4019,18 @@ input[type=button].btn-block {
   border-color: transparent;
 }
 .nav-tabs .nav-link.active,
-.nav-tabs .nav-item.show .nav-link {
+.nav-tabs .nav-link {
   color: #495057;
   background-color: #fff;
   border-color: #dee2e6 #dee2e6 #fff;
 }
+
+.nav-item.show {
+  color: #495057;
+  background-color: #fff;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
 .nav-tabs .dropdown-menu {
   margin-top: -1px;
   border-top-left-radius: 0;
@@ -8032,6 +8075,7 @@ button.bg-black:focus {
   margin-left: auto !important;
 }
 
+
 @media (min-width: 576px) {
   .m-sm-0 {
     margin: 0 !important;
@@ -10154,15 +10198,15 @@ body {
   }
   #mainNav .navbar-brand {
     padding: 0.5rem 0;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 1);
   }
   #mainNav .nav-link {
     transition: none;
     padding: 2rem 1.5rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgb(255, 255, 255);
   }
   #mainNav .nav-link:hover {
-    color: rgba(255, 255, 255, 0.75);
+    color: rgb(255, 255, 255);
   }
   #mainNav .nav-link:active {
     color: #fff;
@@ -10184,7 +10228,7 @@ body {
   #mainNav.navbar-shrink .nav-link:active {
     color: #467370;
   }
-  #mainNav.navbar-shrink .nav-link.active {
+  #mainNav.navbar-shrink .active {
     color: #64a19d;
     outline: none;
     border-bottom: 0.25rem solid #64a19d;
@@ -10207,7 +10251,7 @@ body {
   height: auto;
   min-height: 35rem;
   padding: 15rem 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000000 100%), url("../assets/img/bg-masthead.jpg");
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000000 100%), url("../assets/img/mohawklake.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
@@ -10218,10 +10262,13 @@ body {
   font-size: 2.5rem;
   line-height: 2.5rem;
   letter-spacing: 0.8rem;
+  color: white;
+  /*
   background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
           background-clip: text;
+  */
 }
 .masthead h2 {
   max-width: 20rem;
@@ -10258,8 +10305,9 @@ body {
 }
 
 .projects-section {
-  padding: 10rem 0;
+  padding: 15rem 0;
 }
+
 .projects-section .featured-text {
   padding: 2rem;
 }
@@ -10284,8 +10332,13 @@ body {
   }
 }
 
+#map {
+  width: 100%;
+  height: 500px;
+}
+
 .signup-section {
-  padding: 10rem 0;
+  padding: 15.5rem 0;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.5) 75%, #000000 100%), url("../assets/img/bg-signup.jpg");
   background-position: center;
   background-repeat: no-repeat;
