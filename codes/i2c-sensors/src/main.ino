@@ -9,7 +9,8 @@ void setup() {
 
   Serial.begin(115200);
   while (!Serial);             // If it's an Arduino Leonardo, wait for serial monitor
-  Serial.println("\nI2C Scanner");
+  Serial.println("\nI2C Scanner - v1");
+
 }
 
 void loop() {
