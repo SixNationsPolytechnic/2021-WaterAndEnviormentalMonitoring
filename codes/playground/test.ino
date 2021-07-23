@@ -124,7 +124,7 @@ void loop() {
   float myvol = adc1_get_raw(ADC1_CHANNEL_0);
   Serial.println("Voltage: " + String(myvol));
 
-  String msg = "{\"msgnumber\" :  " + String(msgcounter) + ", \"mac\" :  \"" + WiFi.macAddress() + "\",\"ip\" : \"" + ipToString(WiFi.localIP()) + "\",\"voltage\" :  " + String((myvol * 3.3) / 4095) + ", \"temperature\" : "+String(temperature)+"}";;
+  String msg = "{\"msgnumber\" :  " + String(msgcounter) + ", \"mac\" :  \"" + WiFi.macAddress() + "\",\"ip\" : \"" + ipToString(WiFi.localIP()) + "\",\"voltage\" :  " + String((myvol * 3.9) / 4095) + ", \"temperature\" : "+String(temperature)+"}";;
   send(msg);
   delay(5000);  
 }
