@@ -57,7 +57,7 @@ void displayOLED() {
 }
 
 void setup() {
-   adc1_config_width(ADC_WIDTH_12Bit);
+  adc1_config_width(ADC_WIDTH_12Bit);
   adc1_config_channel_atten(ADC1_CHANNEL_0, ADC_ATTEN_0db); //set reference voltage to internal
   Serial.begin(115200);
   WiFi.begin(ssid, password);
@@ -124,7 +124,7 @@ void loop() {
   float myvol = adc1_get_raw(ADC1_CHANNEL_0);
   Serial.println("Voltage: " + String(myvol));
 
-  String msg = "{\"msgnumber\" :  " + String(msgcounter) + ", \"mac\" :  \"" + WiFi.macAddress() + "\",\"ip\" : \"" + WiFi.localIP() + "\",\"voltage\" :  " + String(myvol) + ", \"temperature\" : "+String(temperature)+"}";;
+  String msg = "{\"msgnumber\" :  " + String(msgcounter) + ", \"mac\" :  \"" + WiFi.macAddress() + "\",\"ip\" : \"" + ipToString(WiFi.localIP()) + "\",\"voltage\" :  " + String((myvol * 3.3) / 4095) + ", \"temperature\" : "+String(temperature)+"}";;
   send(msg);
   delay(5000);  
 }
@@ -138,6 +138,13 @@ void callback(char* topic, byte* message, unsigned int length) {
     Serial.print((char)message[i]);
   }
   Serial.println();
+}
+
+String ipToString(IPAddress ip){
+  String s="";
+  for (int i=0; i<4; i++)
+    s += i  ? "." + String(ip[i]) : String(ip[i]);
+  return s;
 }
 
 void reconnect() {
