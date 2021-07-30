@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    <!-- Ethan v5 thu jul 22 2021 -->
+    <!-- Ethan v7 thu jul 22 2021 -->
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -93,15 +93,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
-                    <div class="col-lg-6">
-                        <div class="bg-black text-center h-100 project">
-                                    <h4 class="text-white">live dashboard</h4>
-                                    <iframe id="dashboard" width="600" height="400" src="https://snpweather.xyz/grafana/d/ytdR8wZ7k/devicetemperature?orgId=1"></iframe>
-                        </div>
-                    </div>
-                </div>
-            
                 <!--
                 <div class="row justify-content-center no-gutters">
                     <div class="col-lg-6"><img class="img-fluid" src="assets/img/demo-image-02.jpg" alt="" /></div>
@@ -120,20 +111,14 @@
                 -->
             </div>
         </section>
-        <!-- Signup -->
 
-        <section class="signup-section" id="signup">
+        <section class="signup-section" id="dashboard">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-10 col-lg-8 mx-auto text-center">
-                        <!--
-                        <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
-                        <h2 class="text-white mb-5">Subscribe to receive updates!</h2>
-                        <form class="form-inline d-flex">
-                            <input class="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" type="email" placeholder="Enter email address..." />
-                            <button class="btn btn-primary mx-auto" type="submit">Subscribe</button>
-                        </form>-->
+                <div class="row justify-content-center align-items-center no-gutters" >
+                    <div class="featured-text-right">
+                        <h4 class="label text-white">live dashboard</h4>
                     </div>
+                    <iframe id="dashboard" width="100%" height="500" src="https://snpweather.xyz/grafana/d/ytdR8wZ7k/devicetemperature?orgId=1&refresh=1m&kiosk"></iframe>
                 </div>
             </div>
         </section>

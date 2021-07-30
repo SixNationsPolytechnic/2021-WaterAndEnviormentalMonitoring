@@ -570,6 +570,15 @@ pre code {
   overflow-y: scroll;
 }
 
+.width-650 {
+  width: 650px;
+}
+
+.label {
+  padding-right: 20px;
+  padding: 25px;
+}
+
 .container,
 .container-fluid,
 .container-xl,
@@ -10315,6 +10324,10 @@ body {
   .projects-section .featured-text {
     padding: 0 0 0 2rem;
     border-left: 0.5rem solid #64a19d;
+  }
+  .projects-section .featured-text-right {
+    padding: 0 0 0 2rem;
+    border-right: 0.5rem solid #64a19d;
   }
 }
 .projects-section .project-text {
