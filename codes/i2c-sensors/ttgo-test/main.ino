@@ -1,4 +1,8 @@
 //#include <Adafruit_BME280.h>
+// TODO: Documentation and split into include/functions
+//       Add a config file .. see tracker
+
+
 #include <WiFi.h>
 #include <PubSubClient.h>
 #include "esp_adc_cal.h"
@@ -22,8 +26,8 @@ DHT dht(14, DHT11);
 char* DEVICEID = "mvktt01";
 
 // Replace the next variables with your SSID/Password combination
-const char* ssid = "Aw geez Rick theres a password";
-const char* password = "SpaceRoses13";
+const char* ssid = "1Aoffice";
+const char* password = "2Fast4You!";
 
 int msgcounter = 0;
 
@@ -111,6 +115,26 @@ void loop() {
 
   float t = dht.readTemperature();
   float h = dht.readHumidity();
+
+  // Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
+    h = dht.readHumidity();
+    // Read temperature as Celsius (the default)
+    t = dht.readTemperature();
+    Serial.print("readHumidity    = ");
+    Serial.println(h);
+    //Serial.print(" ");
+    Serial.print("readTemperature = ");
+    Serial.println(t);
+
+
+    // Check if any reads failed and exit early (to try again).
+    if (isnan(h) || isnan(t) ) {
+      Serial.println("Failed to read from DHT sensor!");
+      //return;
+      h = -99;
+      t = -99;
+    }
+
 
   display.println("DHTtemp: " + String(t) + "ºC");
   display.println("DHT hum: " + String(h) + "%");
