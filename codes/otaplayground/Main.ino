@@ -4,8 +4,10 @@
  * 
  * Aug. 3, 2021 - Updated Aug. 4, 2021
  */
- #define ver = "2021.08.04-0";
- #define debug = false;
+#define ver = "2021.08.04-0";
+#define debug = false;
+
+int msg = 1;
 
 void setup() {
   loadFlash();

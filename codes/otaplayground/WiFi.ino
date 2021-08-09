@@ -33,3 +33,11 @@ bool wifiGetConnection () { // just a nice function to wrap checking and getting
   if (!connected && deviceInfo.ssidC && deviceInfo.passC) connected = wifiConnect(deviceInfo.ssidC, deviceInfo.passC);
   return connected; // will be true if it was able to connect
 }
+
+String ipString(){
+  IPAddress ip = WiFi.localIP();
+  String s="";
+  for (int i=0; i<4; i++)
+    s += i  ? "." + String(ip[i]) : String(ip[i]);
+  return s;
+}

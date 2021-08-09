@@ -4,7 +4,7 @@
 
 #include <EEPROM.h>
 
-struct devInfo { // as all are char*, they are actually only able to be length-1 long. -- should be 224 bytes
+struct devInfo {
   char devId[6];
   char mqtt[16];
   char ssidA[33];
@@ -13,11 +13,27 @@ struct devInfo { // as all are char*, they are actually only able to be length-1
   char passB[33];
   char ssidC[33];
   char passC[33];
+  bool dallas;
+  bool dht;
+  bool bmp;
+  bool screen;
+  bool mq2;
+  bool mq3;
+  bool mq4;s
+  bool mq6;
+  bool mq7;
+  bool mq8;
+  bool mq9;
+  bool mq135;
+  bool waterLevel;
+  bool moisture;
+  bool light;
+  bool noise;
 };
 devInfo deviceInfo;
 
 void loadFlash() {
-  EEPROM.begin(224); // the EEPROM stores only devInfo
+  EEPROM.begin(500); // the EEPROM stores only devInfo - has some extra space just in case
   EEPROM.get(0, deviceInfo); // before loading firmware, the device should have its flash memory loaded with the device info
 }
 

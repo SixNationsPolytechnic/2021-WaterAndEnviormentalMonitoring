@@ -5,5 +5,14 @@ DHT dht(14, DHT11);
 
 void dhtStart() {dht.begin();}
 
-float dhtTemp() {return dht.readTemperature();}
-float dhtHum() {return dht.readHumidity();}
+float dhtTemp = 0;
+float dhtHum = 0;
+
+float dhtTemp() {
+  dhtTemp = dht.readTemperature();
+  return dhtTemp;
+}
+float dhtHum() {
+  dhtHum = dht.readHumidity();
+  return dhtHum;
+}
