@@ -21,7 +21,7 @@ uint8_t hdopGps;
 char t[32]; // used to sprintf for Serial output
 
 TinyGPSPlus _gps;
-HardwareSerial _serial_gps(GPS_SERIAL_NUM);
+HardwareSerial _serial_gps(1);
 
 void gps_time(char * buffer, uint8_t size) {
     snprintf(buffer, size, "%02d:%02d:%02d", _gps.time.hour(), _gps.time.minute(), _gps.time.second());
@@ -48,7 +48,7 @@ uint8_t gps_sats() {
 }
 
 void gps_setup() {
-    _serial_gps.begin(GPS_BAUDRATE, SERIAL_8N1, GPS_RX_PIN, GPS_TX_PIN);
+    _serial_gps.begin(9600, SERIAL_8N1, 12, 15);
 }
 
 static void gps_loop() {

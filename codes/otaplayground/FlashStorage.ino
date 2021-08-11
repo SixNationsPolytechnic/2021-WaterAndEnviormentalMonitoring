@@ -19,7 +19,7 @@ struct devInfo {
   bool screen;
   bool mq2;
   bool mq3;
-  bool mq4;s
+  bool mq4;
   bool mq6;
   bool mq7;
   bool mq8;

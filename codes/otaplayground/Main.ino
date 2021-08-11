@@ -4,22 +4,25 @@
  * 
  * Aug. 3, 2021 - Updated Aug. 4, 2021
  */
-#define ver = "2021.08.04-0";
-#define debug = false;
+String ver = "2021.08.04-0";
+#define debug false
 
 int msg = 1;
 
 void setup() {
+  displayStart();
+  delay(1000);
   loadFlash();
-  wifiGetConnection ();
+  wifiGetConnection();
   firmwareUpdate();
   gps_setup();
+  gps_loop();
   dalStart();
   dhtStart();
-  displayStart();
+  mqttStart();
+  delay(1000);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-
+  
 }
