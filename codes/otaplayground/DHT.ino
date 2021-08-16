@@ -3,7 +3,9 @@
 
 DHT dht(14, DHT11);
 
-void dhtStart() {dht.begin();}
+void dhtStart() {
+  dht.begin();
+}
 
 float dhtTemp = 0.0;
 float dhtHum = 0.0;

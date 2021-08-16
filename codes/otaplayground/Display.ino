@@ -4,6 +4,7 @@
 Adafruit_SSD1306 display(128, 32, &Wire);
 
 void displayClear() {
+  if (!deviceInfo.screen) return;
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(SSD1306_WHITE);
@@ -11,18 +12,22 @@ void displayClear() {
 }
 
 void displayStart() {
+  if (!deviceInfo.screen) return;
   display.begin();
   displayClear();
 }
 
 void print(String toPrint) {
   Serial.print(toPrint);
-  display.print(toPrint);
+  if (deviceInfo.screen) display.print(toPrint);
 }
 
 void println(String toPrint) {
   Serial.println(toPrint);
-  display.println(toPrint);
+  if (deviceInfo.screen) display.println(toPrint);
 }
 
-void output() {display.display();}
+void output() {
+  if (!deviceInfo.screen) return;
+  display.display();
+  }

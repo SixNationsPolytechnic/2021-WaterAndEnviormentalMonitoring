@@ -8,13 +8,27 @@
 
 DynamicJsonDocument doc(1024);
 RTC_DATA_ATTR int messages;
+bool hasMessage = false;
 
 WiFiClient espClient;
 PubSubClient client(espClient);
 
+
+void repeat() {
+  int looper = 0;
+  while (!hasMessage && 100 <= looper) {
+    if (!client.connected()) reconnect();
+    client.loop();
+    looper++;
+    delay(100);
+  }
+  return;
+}
+
 /* Send data to server */
 void sendDataServer() {
   doc["deviceid"] = deviceInfo.devId;
+  doc["version"] = ver;
   doc["latitude"] = gps_latitude();
   doc["longitude"] = gps_longitude();
   doc["msg"] = messages;
@@ -35,6 +49,9 @@ void sendDataServer() {
   strcat(toSend, "/data");
   client.publish(toSend, docBuffer, n);
   doc.clear();
+  println("Awaiting response");
+  repeat();
+  return;
 }
 
 void reconnect() {
@@ -68,15 +85,6 @@ void callback(char* topic, byte* message, unsigned int length) {
     Serial.print((char)message[i]);
   }
   Serial.println();
-}
-
-void repeat() {
-  int startTime = _gps.time.second();
-  bool hasMessage = false;
-  while (!hasMessage || _gps.time.second() <= startTime + 5) {
-    if (!client.connected()) reconnect();
-    client.loop();
-  }
 }
 
 void mqttStart() {
