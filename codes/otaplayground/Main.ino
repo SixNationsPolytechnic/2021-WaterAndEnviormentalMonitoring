@@ -4,7 +4,7 @@
  * 
  * Aug. 3, 2021 - Updated Aug. 13, 2021
  */
-String ver = "2021-08-16-1";
+String ver = "2021-08-18-1";
 #define debug false
 
 struct devInfo {

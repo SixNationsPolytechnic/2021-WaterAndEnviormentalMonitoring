@@ -78,7 +78,8 @@ bool firmwareUpdateCheck() { // https://github.com/programmer131/ESP8266_ESP32_S
   {
     payload.trim();
     if (payload.equals(ver)) {
-      Serial.printf("\nDevice already on latest firmware version: %s\n", ver);
+      Serial.print("\nDevice already on latest firmware version: ");
+      Serial.println(ver);
       return false;
     }
     else

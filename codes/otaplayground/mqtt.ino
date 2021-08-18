@@ -16,7 +16,7 @@ PubSubClient client(espClient);
 
 void repeat() {
   int looper = 0;
-  while (!hasMessage && 100 <= looper) {
+  while (!hasMessage && looper <= 100) {
     if (!client.connected()) reconnect();
     client.loop();
     looper++;
@@ -80,11 +80,16 @@ void callback(char* topic, byte* message, unsigned int length) {
   Serial.print("Message arrived on topic: ");
   Serial.print(topic);
   Serial.print(". Message: ");
-
   for (int i = 0; i < length; i++) {
     Serial.print((char)message[i]);
   }
   Serial.println();
+  deserializeJson(doc, message);
+  if (doc["command"] == "respond") {
+    if (doc["length"] != deviceInfo.sleepLength && doc["length"] != 0) deviceInfo.sleepLength = doc["length"];
+  }
+  doc.clear();
+  hasMessage = true;
 }
 
 void mqttStart() {

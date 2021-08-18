@@ -11,5 +11,5 @@ void loadFlash() {
 
 void writeFlash() {
   EEPROM.put(0, deviceInfo);
-  EEPROM.commit();
+  //EEPROM.commit();
 };
